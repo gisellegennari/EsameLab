@@ -13,7 +13,7 @@ class CSVTimeSeriesFile:
         values = []
         values2 = []  #lista che contiene giorno per giorno
 
-        # Provo ad aprire il file per estrarci i dati. Se non ci riesco, prima avverto del'errore,
+        # Provo ad aprire il file per estrarci i dati. Se non ci riesco, prima avverto dell'errore,
         # poi devo abortire. Questo e' un errore "un-recoverable", ovvero non posso proseguire con
         # la lettura dei dati se non riesco ad aprire il file!
         try:
@@ -71,7 +71,7 @@ class CSVTimeSeriesFile:
     def daily_stats(self, time_series):
 
         listApp = []  #####da cancellare
-        day_start_epoch = 0
+        day_start_epoch = 1 #0
         nmin = []
         nmax = []
         risultato = []
@@ -83,9 +83,11 @@ class CSVTimeSeriesFile:
             #day_start_epoch = time_series[i][0] - (time_series[i][0] % 86400)
             #memory = day_start_epoch = time_series[ii][0] - (time_series[ii][0] % 86400)
             day_start_epoch = time_series[i][0]
-            memory = time_series[ii][0]
+            memory = time_series[ii][0] #inizio
+						diff = (day_start_epoch - memory) % 86400
 
-            if memory == day_start_epoch:
+            if diff != 24: 
+						#memory == day_start_epoch:
                 #nmin += str(time_series[i][1]) + "-"
                 nmin.append(time_series[i][1])
                 nmax.append(time_series[i][1])
@@ -96,11 +98,11 @@ class CSVTimeSeriesFile:
                 listApp.append(min(nmin))
                 listApp.append(max(nmax))
                 listApp.append(int(nmedia))
-                risultato.append(listApp)
+                risultato.append(listApp)  #da controllare!!
                 nmedia = 0
                 nmin = []
                 nmax = []
-                listApp = []
+                listApp = 1  #0 o []
                 count_n = 0
                 ii = i
                 i -= 1
