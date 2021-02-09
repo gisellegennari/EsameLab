@@ -122,5 +122,7 @@ time_series_file = CSVTimeSeriesFile(name='data.csv')
 time_series = time_series_file.get_data()
 time_series2 = time_series_file.daily_stats(time_series)
 
-print('Dati contenuti nel file: "{}"'.format(time_series2))
+print(format(time_series2))
+
+
 
